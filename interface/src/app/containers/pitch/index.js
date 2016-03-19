@@ -16,13 +16,11 @@ export default class Pitch extends Component {
 
   componentWillMount() {
     this.props.bindShortcut('esc', () => {
-      console.log('go back');
       this.setState({showOverview:true})
     });
   }
 
   onTileChoose() {
-    console.log('YO TILE CHOOSe');
     this.setState({showOverview:false})
   }
 
@@ -37,8 +35,8 @@ export default class Pitch extends Component {
                   <Overview onTileChoose={this.onTileChoose.bind(this)}/>
                 </Screen>
               ) : (
-                <Screen cover='static/images/goal.gif'>
-                  <Metainfo/>
+                <Screen video='static/videos/bayernjuventus.mp4'>
+                  <Metainfo videoDelay={30}video='static/videos/tor.mp4'/>
                 </Screen>
               )}
             </div>
@@ -51,10 +49,3 @@ export default class Pitch extends Component {
 
 
 export default mouseTrap(Pitch);
-
-
-// Video code
-// <video src="http://www.sample-videos.com/video/mp4/720/big_buck_bunny_720p_1mb.mp4" autoPlay>
-//   <source  type="video/mp4" />
-//   Your browser doesn't support HTML5 video tag.
-// </video>

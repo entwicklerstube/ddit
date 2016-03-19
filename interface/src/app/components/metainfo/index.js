@@ -6,7 +6,8 @@ class Metainfo extends Component {
     super(props);
 
     this.state = {
-      size: 'small'
+      size: 'small',
+      videoPlay: false
     }
   }
 
@@ -28,10 +29,21 @@ class Metainfo extends Component {
 
   render() {
 
+    setTimeout(() => {
+      this.setState({videoPlay: true})
+    }, 2000)
+
     return (
       <div className='metainfo'>
         <div className={`info-block ${this.state.size}`}>
-          info
+          { this.state.videoPlay ? (
+            <video className='active-video' src={this.props.video} autoPlay>
+              <source  type="video/mp4" />
+              Your browser doesn't support HTML5 video tag.
+            </video>
+          ) : (
+            null
+          )}
         </div>
       </div>
     );

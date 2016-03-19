@@ -4,12 +4,24 @@ export default class extends Component {
   render() {
 
     const inlineStyling = {
-      background: `url("${this.props.cover}")`
+      backgroundImage: `url("${this.props.cover}")`
     }
 
     return (
       <div className='pitch-screen' style={inlineStyling}>
-        { this.props.children }
+
+        { this.props.video ? (
+          <video className='active-video' src={this.props.video} autoPlay>
+            <source  type="video/mp4" />
+            Your browser doesn't support HTML5 video tag.
+          </video>
+        ) : (
+          null
+        )}
+
+        <div className='children'>
+          { this.props.children }
+        </div>
       </div>
     );
   }
