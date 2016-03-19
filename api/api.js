@@ -2,6 +2,12 @@ var app = require('express')();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
 var r = require('rethinkdb');
+var md5 = require('md5');
+
+/* CONFIG */
+var wettercom_user = "7hack";
+var wettercom_pw = "hacktheweather";
+
 
 // start the server
 console.log('Server started!');
@@ -14,17 +20,13 @@ app.use(jsonParser);
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 var connection = null;
-r.connect( {host: 'localhost', port: 28015}, function(err, conn) {
-    if (err) throw err;
-    connection = conn;
-});
+
 
 server.listen(3000);
 
 app.get('/', function (req, res) {
     res.sendfile(__dirname + '/index.html');
 });
-
 
 /* START SPORTSRADAR */
 
@@ -34,15 +36,21 @@ app.post('/inputGelbeKarten', urlencodedParser, function (req, res) {
      team: 'B. Munich',
      team_img: 'http://ls.betradar.com/ls/crest/big/2672.png'
      }
-     * */
-
+     **/
     var gelbeKarte = req.body;
+
     if(gelbeKarte){
-        console.log(gelbeKarte);
-        res.status(200).send('Eintrag erfolgreich hinzugefügt');
+        console.log("Gelbe Karte: " + gelbeKarte);
+
+        r.table("gelbeKarte").insert(gelbeKarte).run(conn, function(){
+            res.status(200).send('Eintrag erfolgreich hinzugefügt');
+        });
+
     } else {
         res.status(400).send('Error. Konnte nicht hinzugefügt werden');
     }
+
+
 });
 
 app.post('/inputRoteKarten', urlencodedParser, function (req, res) {
@@ -52,11 +60,13 @@ app.post('/inputRoteKarten', urlencodedParser, function (req, res) {
      team_img: 'http://ls.betradar.com/ls/crest/big/2672.png'
      }
      * */
-
     var roteKarte = req.body;
     if(roteKarte){
-        console.log(roteKarte);
-        res.status(200).send('Eintrag erfolgreich hinzugefügt');
+        console.log("Rote Karte " + roteKarte);
+        r.table("roteKarte").insert(gelbeKarte).run(conn, function(){
+            res.status(200).send('Eintrag erfolgreich hinzugefügt');
+        });
+
     } else {
         res.status(400).send('Error. Konnte nicht hinzugefügt werden');
     }
@@ -65,8 +75,11 @@ app.post('/inputRoteKarten', urlencodedParser, function (req, res) {
 app.post('/inputTor', function (req, res) {
     var tor = req.body;
     if(tor){
-        console.log(tor);
-        res.status(200).send('Eintrag erfolgreich hinzugefügt');
+        console.log("Tor: " + tor);
+        r.table("tor").insert(tor).run(conn, function(){
+            res.status(200).send('Eintrag erfolgreich hinzugefügt');
+        });
+
     } else {
         res.status(400).send('Error. Konnte nicht hinzugefügt werden');
     }
@@ -75,8 +88,11 @@ app.post('/inputTor', function (req, res) {
 app.post('/inputVerschossen', function (req, res) {
     var verschossen = req.body;
     if(verschossen){
-        console.log(verschossen);
-        res.status(200).send('Eintrag erfolgreich hinzugefügt');
+        console.log("Verschossen:" + verschossen);
+        r.table("verschossen").insert(verschossen).run(conn, function(){
+            res.status(200).send('Eintrag erfolgreich hinzugefügt');
+        });
+
     } else {
         res.status(400).send('Error. Konnte nicht hinzugefügt werden');
     }
@@ -85,8 +101,11 @@ app.post('/inputVerschossen', function (req, res) {
 app.post('/inputEinwurf', urlencodedParser, function (req, res) {
     var einwurf = req.body;
     if(einwurf){
-        console.log(einwurf);
-        res.status(200).send('Eintrag erfolgreich hinzugefügt');
+        console.log("Einwurf: " + einwurf);
+        r.table("einwurf").insert(einwurf).run(conn, function(){
+            res.status(200).send('Eintrag erfolgreich hinzugefügt');
+        });
+
     } else {
         res.status(400).send('Error. Konnte nicht hinzugefügt werden');
     }
@@ -95,8 +114,11 @@ app.post('/inputEinwurf', urlencodedParser, function (req, res) {
 app.post('/inputFreistoss', urlencodedParser, function (req, res) {
     var freistoss = req.body;
     if(freistoss){
-        console.log(freistoss);
-        res.status(200).send('Eintrag erfolgreich hinzugefügt');
+        console.log("Freistoss: " + freistoss);
+        r.table("freistoss").insert(freistoss).run(conn, function(){
+            res.status(200).send('Eintrag erfolgreich hinzugefügt');
+        });
+
     } else {
         res.status(400).send('Error. Konnte nicht hinzugefügt werden');
     }
@@ -105,8 +127,11 @@ app.post('/inputFreistoss', urlencodedParser, function (req, res) {
 app.post('/inputEcke', urlencodedParser, function (req, res) {
     var ecke = req.body;
     if(ecke){
-        console.log(ecke);
-        res.status(200).send('Eintrag erfolgreich hinzugefügt');
+        console.log("Ecke: " + ecke);
+        r.table("ecke").insert(ecke).run(conn, function(){
+            res.status(200).send('Eintrag erfolgreich hinzugefügt');
+        });
+
     } else {
         res.status(400).send('Error. Konnte nicht hinzugefügt werden');
     }
@@ -115,8 +140,10 @@ app.post('/inputEcke', urlencodedParser, function (req, res) {
 app.post('/inputAbseits', urlencodedParser, function (req, res) {
     var abseits = req.body;
     if(abseits){
-        console.log(abseits);
-        res.status(200).send('Eintrag erfolgreich hinzugefügt');
+        console.log("Abseits: " + abseits);
+        r.table("abseits").insert(abseits).run(conn, function(){
+            res.status(200).send('Eintrag erfolgreich hinzugefügt');
+        });
     } else {
         res.status(400).send('Error. Konnte nicht hinzugefügt werden');
     }
@@ -126,6 +153,14 @@ app.post('/inputAbseits', urlencodedParser, function (req, res) {
 
 io.on('connection', function (socket) {
     /* WETTER.COM */
+
+    socket.on("getWeatherToCity", function(data) {
+
+        /* 7hackhacktheweathermunich */
+
+        $url = "http://rwds2.wetter.com/location/index/search/"+data.cityname+"/user/"+wettercom_user+"/cs/"+md5(wettercom_user + wettercom_pw + data.cityname.toLowerCase());
+        console.log($url);
+    });
 
     /* ENDE WETTER.COM */
 
@@ -138,11 +173,6 @@ io.on('connection', function (socket) {
     });
 
     socket.on("getCornersToTeam", function(){
-
-    });
-
-    socket.on("getWeatherToCity", function(data) {
-       $url = "http://rwds2.wetter.com/location/index/search/"+data.cityname+"/user/7hack/cs/bf5860dd97b8582b194f2230fa43efd9/"
 
     });
 
