@@ -1,8 +1,30 @@
 .pitch {
   .tv-mock {
     background: url('static/images/tv.png');
-    width: 100px;
-    height: 100px;
+    width: 950px;
+    height: 700px;
+    background-size: contain;
     display: block;
+    position: absolute;
+    top: 70px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+
+    .tv-screen {
+      display: block;
+      position: absolute;
+      width: 872px;
+      height: 491px;
+      left: 41px;
+      top: 30px;
+      background: black;
+      position: absolute;
+
+      video {
+        width: 100%;
+      }
+    }
   }
 }
