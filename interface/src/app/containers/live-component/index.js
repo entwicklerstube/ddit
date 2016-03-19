@@ -1,5 +1,4 @@
 import React, {Component}                   from 'react';
-import { Link } from 'react-router';
 
 export default class extends Component {
   constructor(props) {
@@ -8,9 +7,8 @@ export default class extends Component {
 
   render() {
     return (
-      <div className="app">
-        <Link to={'/pitch'}>To the Pitch</Link>
-        <Link to={'/live-component'}>To the LiveComponent</Link>
+      <div className="live-component">
+        @jonathan, das ist dein ding
       </div>
     );
   }
