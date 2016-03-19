@@ -2,7 +2,6 @@ var app = require('express')();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
 var r = require('rethinkdb');
-var http = require('http');
 
 
 // routes will go here
