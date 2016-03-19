@@ -1,19 +1,31 @@
 <html>
 <head>
 <script src="/socket.io/socket.io.js"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
 </head>
 <body>
 
 <h1>API</h1>
 
-
-
-
-
+<button data-name="gelbeKarte">Gelbe Karte</button>
+<button data-name="roteKarte">Rote Karte</button>
+<button data-name="tor">Tor geschossen</button>
+<button data-name="verschossen">Tor verschossen</button>
+<button data-name="einwurf">Einwurf</button>
+<button data-name="freistoss">Freistoß</button>
+<button data-name="ecke">Ecke</button>
+<button data-name="abseits">Abseits</button>
 
 <script>
     var socket = io('http://localhost:3000');
+
+    $(function(){
+       $('button').click(function(){
+           var event = $(this).attr('data-name');
+           socket.emit(event);
+       });
+    });
+
 </script>
 </body>
 

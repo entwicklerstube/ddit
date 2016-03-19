@@ -60,7 +60,6 @@ r.connect({ host: 'localhost', port: 28015}, function(err, conn) {
             });
         }
     }
-
 });
 
 server.listen(3000);
@@ -107,7 +106,6 @@ app.post('/inputRoteKarten', urlencodedParser, function (req, res) {
         r.table("roteKarte").insert(gelbeKarte).run(conn, function(){
             res.status(200).send('Eintrag erfolgreich hinzugefügt');
         });
-
     } else {
         res.status(400).send('Error. Konnte nicht hinzugefügt werden');
     }
@@ -201,20 +199,42 @@ io.on('connection', function (socket) {
 
         $url = "http://rwds2.wetter.com/location/index/search/"+data.cityname+"/user/"+wettercom_user+"/cs/"+md5(wettercom_user + wettercom_pw + data.cityname.toLowerCase());
         console.log($url);
+
+        io.emit('pushWeatherFromCity');
     });
 
     /* ENDE WETTER.COM */
 
-    socket.on("getYellowCardsToGame", function(){
 
+    socket.on("getYellowCardsToGame", function(){
+        io.emit("pushYellowCardsToGame");
     });
 
     socket.on("getRedCardsToGame", function(){
-
+        io.emit("pushRedCardsToGame");
     });
 
-    socket.on("getCornersToTeam", function(){
-
+    socket.on("getTorToGame", function(){
+        io.emit("pushTorToGame");
     });
 
+    socket.on("getVerschossenToGame", function(){
+        io.emit("pushVerschossenToGame");
+    });
+
+    socket.on("getEinwuerfeToGame", function(){
+        io.emit("pushEinwuerfeToGame");
+    });
+
+    socket.on("getFreistoesseToGame", function(){
+        io.emit("pushFreistoesseToGame");
+    });
+
+    socket.on("getEckenToGame", function(){
+        io.emit("pushEckenToGame");
+    });
+
+    socket.on("getAbseitsToGame", function(){
+        io.emit("pushAbseitsToGame");
+    });
 });
