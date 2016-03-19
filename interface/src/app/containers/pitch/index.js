@@ -7,8 +7,8 @@ export default class extends Component {
 
   render() {
     return (
-      <div className="app">
-        KANGAROO THING...
+      <div className="pitch">
+        <div className='tv-mock'>aef</div>
       </div>
     );
   }
