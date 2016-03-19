@@ -1,0 +1,80 @@
+// Colors
+// ------------------------------------------------------
+$color-palette-white:         #ffffff;
+$color-palette-black:         #000000;
+
+// Semantic colors
+// ------------------------------------------------------
+$color-primary:                   $color-palette-white;
+$color-background:                $color-palette-white;
+$color-text:                      $color-palette-black;
+$color-text-white:                $color-palette-white;
+$color-element-background:        $color-palette-white;
+
+
+// Typography
+// ------------------------------------------------------
+
+$font-size-tiny:                    10px;
+$font-size-small:                   11px;
+$font-size-base:                    12px;
+$font-size-big:                     14px;
+$font-size-great:                   16px;
+$font-size-bigger:                  18px;
+$font-size-huge:                    24px;
+
+$font-family-base:                  'Open Sans', sans-serif;
+
+$line-height-base:                  1.3;
+$font-weight-light:                 200;
+$font-weight-base:                  400;
+$font-weight-bold:                  700;
+
+$scut-em-base:                      $font-size-base;
+
+// Media Queries
+// ---------------------------------------------------
+
+// Here we define the lower and upper bounds for each media size
+$screen-sm-max:             scut-em(640px);
+$screen-md-min:             scut-em(641px);
+$screen-md-max:             scut-em(960px);
+$screen-lg-min:             scut-em(961px);
+
+// Actual media queries
+$media-screen:              "only screen";
+
+$media-sm:                  $media-screen;
+$media-sm-only:             "#{$media-screen} and (max-width: #{$screen-sm-max})";
+
+$media-md:                  "#{$media-screen} and (min-width:#{$screen-md-min})";
+$media-md-only:             "#{$media-screen} and (min-width:#{$screen-md-min}) and (max-width:#{$screen-md-max})";
+
+$media-lg:                  "#{$media-screen} and (min-width:#{$screen-lg-min})";
+
+$media-sm-and-md-only:      "#{$media-screen} and (max-width:#{$screen-md-max})";
+
+$media-retina:              "#{$media-screen} and (-webkit-min-device-pixel-ratio : 1.5),
+                                #{$media-screen} and (-o-min-device-pixel-ratio: 3/2),
+                                #{$media-screen} and (min--moz-device-pixel-ratio: 1.5),
+                                #{$media-screen} and (min-device-pixel-ratio: 1.5)";
+
+// Layout
+// ------------------------------------------------------
+$space-base:                5px;
+$padding-base:              15px;
+$box-shadow-base:           0 2px 4px -1px rgba(0, 0, 0, 0.14), 0 4px 5px 0 rgba(0, 0, 0, 0.098), 0 1px 10px 0 rgba(0, 0, 0, 0.084);
+$box-shadow-inner:          0px 0px 6px 0px rgba(0,0,0,0.2) inset;
+$border-radius:             6px;
+
+// Stacking
+// ------------------------------------------------------
+$application-stacking:      main__body, header, dialog;
+$body-stacking:             configurator__content, configurator__detail, sidebar;
+
+// Animation
+// ------------------------------------------------------
+$transition-duration:       .4s;
+
+// Component
+// ------------------------------------------------------
