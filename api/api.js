@@ -28,17 +28,21 @@ r.connect({ host: 'localhost', port: 28015}, function(err, conn) {
     connection = conn;
 
     // Create Datebase for first init
-    r.dbCreate('tictactoe').run(connection, function(err) {});
+    r.dbCreate('ddtv').run(connection, function(err) {});
 
     // Map db to connection
-    connection.use('tictactoe');
+    connection.use('ddtv');
 
     r.tableList().run(connection, function (err, list) {
         if (err) throw err;
-        checkTable(list, "user");
-        checkTable(list, "rooms");
-        checkTable(list, "turns");
-        checkTable(list, "wins");
+        checkTable(list, "gelbeKarte");
+        checkTable(list, "roteKarte");
+        checkTable(list, "tor");
+        checkTable(list, "verschossen");
+        checkTable(list, "einwurf");
+        checkTable(list, "freistoss");
+        checkTable(list, "ecke");
+        checkTable(list, "abseits");
     });
 
     // Check if table exists
