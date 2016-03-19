@@ -1,10 +1,27 @@
 import React, {Component} from 'react';
+import { mouseTrap } from 'react-mousetrap';
 
 import Overview from '../../components/overview';
+import Screen from '../../components/screen';
+import Metainfo from '../../components/metainfo';
 
-export default class extends Component {
+export default class Pitch extends Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      showOverview: true
+    }
+  }
+
+  componentWillMount() {
+    this.props.bindShortcut('esc', () => {
+      this.setState({showOverview:true})
+    });
+  }
+
+  onTileChoose() {
+    this.setState({showOverview:false})
   }
 
   render() {
@@ -13,7 +30,15 @@ export default class extends Component {
         <div className='tv-mock'>
           <div className='tv-screen'>
             <div className='tv-wrapper'>
-              <Overview/>
+              { this.state.showOverview ? (
+                <Screen cover='static/images/tv-cover.png'>
+                  <Overview onTileChoose={this.onTileChoose.bind(this)}/>
+                </Screen>
+              ) : (
+                <Screen video='static/videos/bayernjuventus.mp4'>
+                  <Metainfo videoDelay={30}video='static/videos/tor.mp4'/>
+                </Screen>
+              )}
             </div>
           </div>
         </div>
@@ -23,8 +48,4 @@ export default class extends Component {
 }
 
 
-// Video code
-// <video src="http://www.sample-videos.com/video/mp4/720/big_buck_bunny_720p_1mb.mp4" autoPlay>
-//   <source  type="video/mp4" />
-//   Your browser doesn't support HTML5 video tag.
-// </video>
+export default mouseTrap(Pitch);

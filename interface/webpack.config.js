@@ -23,7 +23,7 @@ module.exports = {
         loaders: ['style', 'css', 'autoprefixer', 'sass?sourceMap']
       },
       {
-        test: /\.(ttf|eot|woff|woff2|svg|png)$/,
+        test: /\.(ttf|eot|woff|woff2|svg|png|jpg|mp4)$/,
         loader: "file-loader"
       },
       {

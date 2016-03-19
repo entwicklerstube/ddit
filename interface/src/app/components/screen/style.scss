@@ -1,0 +1,22 @@
+.pitch-screen {
+  overflow: auto;
+  position: absolute;
+  top: 0;
+  background-size: cover;
+  background-position: 0 -50px;
+  width: 100%;
+  height: 100%;
+
+  .children {
+    position: absolute;
+    z-index: 20;
+    height: 100%;
+    width: 100%;
+    display: block;
+  }
+
+  .active-video {
+    position: absolute;
+    z-index: 10;
+  }
+}

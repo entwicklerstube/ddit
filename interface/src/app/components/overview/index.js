@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Tile from '../tile';
+import View from '../view';
 import { mouseTrap } from 'react-mousetrap';
 
 
@@ -9,10 +10,11 @@ export default class Overview extends Component {
 
     this.state = {
       activeTileID: 0,
+      showDashboard: false,
       tiles: [{
-        _active: true
+        cover: 'static/images/tiles/bayern-juventus.png'
       },{
-        _active: false
+        cover: 'static/images/tiles/football.png'
       }]
     }
   }
@@ -27,13 +29,13 @@ export default class Overview extends Component {
     })
 
     this.props.bindShortcut('enter', () => {
-      alert(`You've choosen ID: ${this.state.activeTileID}`)
+      this.props.onTileChoose(this.state.activeTileID);
     })
   }
 
   render() {
     return (
-      <div className='pitch-overview'>
+      <div className='overview'>
         <div className='wrapper'>
           { this.state.tiles.map( (tile, i) => <Tile key={i} active={this.state.activeTileID === i ? 1 : 0} { ...tile } /> ) }
         </div>
