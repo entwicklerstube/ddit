@@ -5,7 +5,7 @@ export default (componentHTML, initialState) => (`
     <meta charset="utf-8">
     <base href="/">
 
-    <title>MyApp</title>
+    <title>DD.TV</title>
     <link rel='stylesheet' href='dist/app.css'>
 
   </head>
