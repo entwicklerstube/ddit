@@ -8,7 +8,7 @@ const app = express();
 
 app.use(morgan('dev'));
 app.use(compress());
-app.use('/dist', express.static(join(process.env.PWD, 'dist'), {maxAge : '1d'}));
+app.use('/static', express.static(join(process.env.PWD, '/src/app/static'), {maxAge : '1d'}));
 
 app.use(renderResponse);
 

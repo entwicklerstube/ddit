@@ -1,0 +1,26 @@
+.metainfo {
+  display: block;
+
+  .info-block {
+    transition: .5s;
+    transition-timing-function: ease;
+    display: block;
+    position: absolute;
+    right: 25px;
+    bottom: 25px;
+    box-shadow: -5px -5px 40px 0px rgba(0,0,0,.5);
+    background: white;
+    padding: 5px;
+
+    &.small {
+      width: 200px;
+      height: 120px;
+    }
+
+    &.big {
+      width: 300px;
+      height: 200px;
+    }
+
+  }
+}

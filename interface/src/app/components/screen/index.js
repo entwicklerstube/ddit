@@ -8,7 +8,9 @@ export default class extends Component {
     }
 
     return (
-      <div className={`pitch-tile ${this.props.active ? 'active' : ''}`} style={inlineStyling}></div>
+      <div className='pitch-screen' style={inlineStyling}>
+        { this.props.children }
+      </div>
     );
   }
 }

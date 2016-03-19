@@ -1,10 +1,29 @@
 import React, {Component} from 'react';
+import { mouseTrap } from 'react-mousetrap';
 
 import Overview from '../../components/overview';
+import Screen from '../../components/screen';
+import Metainfo from '../../components/metainfo';
 
-export default class extends Component {
+export default class Pitch extends Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      showOverview: true
+    }
+  }
+
+  componentWillMount() {
+    this.props.bindShortcut('esc', () => {
+      console.log('go back');
+      this.setState({showOverview:true})
+    });
+  }
+
+  onTileChoose() {
+    console.log('YO TILE CHOOSe');
+    this.setState({showOverview:false})
   }
 
   render() {
@@ -13,7 +32,15 @@ export default class extends Component {
         <div className='tv-mock'>
           <div className='tv-screen'>
             <div className='tv-wrapper'>
-              <Overview/>
+              { this.state.showOverview ? (
+                <Screen cover='static/images/tv-cover.png'>
+                  <Overview onTileChoose={this.onTileChoose.bind(this)}/>
+                </Screen>
+              ) : (
+                <Screen cover='static/images/goal.gif'>
+                  <Metainfo/>
+                </Screen>
+              )}
             </div>
           </div>
         </div>
@@ -21,6 +48,9 @@ export default class extends Component {
     );
   }
 }
+
+
+export default mouseTrap(Pitch);
 
 
 // Video code
