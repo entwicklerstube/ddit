@@ -13,6 +13,7 @@
     "express" : "latest",
     "http" : "latest",
     "rethinkdb" : "latest",
-    "body-parser" : "latest"
+    "body-parser" : "latest",
+    "md5" : "latest"
   }
 }
