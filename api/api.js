@@ -27,28 +27,101 @@ app.get('/', function (req, res) {
 
 
 /* START SPORTSRADAR */
-app.post('/inputRoteKarten', function (req, res) {
-    var gelbeKarte = req.body;
-    console.log(gelbeKarte);
-    res.status(200).send('Eintrag erfolgreich hinzugefügt');
-});
 
 app.post('/inputGelbeKarten', urlencodedParser, function (req, res) {
-    console.log(req.body);
-    res.sendStatus(200);
+    /*
+     * var testreq = { time: '90',
+     team: 'B. Munich',
+     team_img: 'http://ls.betradar.com/ls/crest/big/2672.png'
+     }
+     * */
+
+    var gelbeKarte = req.body;
+    if(gelbeKarte){
+        console.log(gelbeKarte);
+        res.status(200).send('Eintrag erfolgreich hinzugefügt');
+    } else {
+        res.status(400).send('Error. Konnte nicht hinzugefügt werden');
+    }
+});
+
+app.post('/inputRoteKarten', urlencodedParser, function (req, res) {
+    /*
+     * var testreq = { time: '90',
+     team: 'B. Munich',
+     team_img: 'http://ls.betradar.com/ls/crest/big/2672.png'
+     }
+     * */
+
+    var roteKarte = req.body;
+    if(roteKarte){
+        console.log(roteKarte);
+        res.status(200).send('Eintrag erfolgreich hinzugefügt');
+    } else {
+        res.status(400).send('Error. Konnte nicht hinzugefügt werden');
+    }
 });
 
 app.post('/inputTor', function (req, res) {
-    var gelbeKarte = req.body;
-    console.log(gelbeKarte);
-    res.status(200).send('Eintrag erfolgreich hinzugefügt');
+    var tor = req.body;
+    if(tor){
+        console.log(tor);
+        res.status(200).send('Eintrag erfolgreich hinzugefügt');
+    } else {
+        res.status(400).send('Error. Konnte nicht hinzugefügt werden');
+    }
 });
 
 app.post('/inputVerschossen', function (req, res) {
-    var gelbeKarte = req.body;
-    console.log(gelbeKarte);
-    res.sendStatus(200).send('Eintrag erfolgreich hinzugefügt');
+    var verschossen = req.body;
+    if(verschossen){
+        console.log(verschossen);
+        res.status(200).send('Eintrag erfolgreich hinzugefügt');
+    } else {
+        res.status(400).send('Error. Konnte nicht hinzugefügt werden');
+    }
 });
+
+app.post('/inputEinwurf', urlencodedParser, function (req, res) {
+    var einwurf = req.body;
+    if(einwurf){
+        console.log(einwurf);
+        res.status(200).send('Eintrag erfolgreich hinzugefügt');
+    } else {
+        res.status(400).send('Error. Konnte nicht hinzugefügt werden');
+    }
+});
+
+app.post('/inputFreistoss', urlencodedParser, function (req, res) {
+    var freistoss = req.body;
+    if(freistoss){
+        console.log(freistoss);
+        res.status(200).send('Eintrag erfolgreich hinzugefügt');
+    } else {
+        res.status(400).send('Error. Konnte nicht hinzugefügt werden');
+    }
+});
+
+app.post('/inputEcke', urlencodedParser, function (req, res) {
+    var ecke = req.body;
+    if(ecke){
+        console.log(ecke);
+        res.status(200).send('Eintrag erfolgreich hinzugefügt');
+    } else {
+        res.status(400).send('Error. Konnte nicht hinzugefügt werden');
+    }
+});
+
+app.post('/inputAbseits', urlencodedParser, function (req, res) {
+    var abseits = req.body;
+    if(abseits){
+        console.log(abseits);
+        res.status(200).send('Eintrag erfolgreich hinzugefügt');
+    } else {
+        res.status(400).send('Error. Konnte nicht hinzugefügt werden');
+    }
+});
+
 /* END SPORTSRADAR */
 
 io.on('connection', function (socket) {
@@ -68,5 +141,9 @@ io.on('connection', function (socket) {
 
     });
 
+    socket.on("getWeatherToCity", function(data) {
+       $url = "http://rwds2.wetter.com/location/index/search/"+data.cityname+"/user/7hack/cs/bf5860dd97b8582b194f2230fa43efd9/"
+
+    });
 
 });
