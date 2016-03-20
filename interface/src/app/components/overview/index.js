@@ -37,7 +37,7 @@ export default class Overview extends Component {
     return (
       <div className='overview'>
         <div className='wrapper'>
-          { this.state.tiles.map( (tile, i) => <Tile key={i} active={this.state.activeTileID === i ? 1 : 0} { ...tile } /> ) }
+          { this.state.tiles.map( (tile, i) => <Tile key={i} active={this.state.activeTileID === i ? 0 : 1} { ...tile } /> ) }
         </div>
       </div>
     );
