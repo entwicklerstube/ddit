@@ -32,7 +32,7 @@ export default class extends Component {
     row_2: 0
   };
 
-  animateRow(row) {
+  animateEnterRow(row) {
     return () => {
       animate(400, p => {
         this.setState({['row_' + row]: p});
@@ -40,38 +40,65 @@ export default class extends Component {
     };
   };
 
+  animateLeaveRow(row) {
+    return () => {
+      animate(200, p => {
+        this.setState({['row_' + row]: ((p-1)*(-1))});
+      }, EasingFunctions.easeInOutQuad)
+    };
+  };
+
   componentDidMount() {
     timeline([
-      500, this.animateRow(0),
-      1300, this.animateRow(1),
-      2100, this.animateRow(2)
+      400, this.animateEnterRow(0),
+      800, this.animateEnterRow(1),
+      1200, this.animateEnterRow(2)
     ]);
+  }
+
+  constructor(props) {
+    super(props);
+
+    setTimeout(() => {
+      timeline([
+        0, this.animateLeaveRow(2),
+        200, this.animateLeaveRow(1),
+        400, this.animateLeaveRow(0)
+      ]);
+    }, 4000)
+
   }
 
   render() {
     const {row_0, row_1, row_2} = this.state;
 
     return <div className="live-component">
-      <div className="row">
-        <BarLeft progress={60 * row_0}/>
-        <BarRight progress={90 * row_0}/>
+      <div className="box" style={ {height: row_0 * 80} }>
+        <div className="row">
+          <BarLeft progress={60 * row_0}/>
+          <BarRight progress={90 * row_0}/>
+        </div>
+        <div className="achievement">
+          POSESSION
+        </div>
       </div>
-      <div className="achievement" style={ {height: row_0 * 40} } >
-        POSESSION
+      <div className="box" style={ {height: row_1 * 80} }>
+        <div className="row">
+          <BarLeft progress={80 * row_1}/>
+          <BarRight progress={20 * row_1}/>
+        </div>
+        <div className="achievement" style={ {height: row_1 * 40} }>
+          DUELS WON
+        </div>
       </div>
-      <div className="row">
-        <BarLeft progress={80 * row_1}/>
-        <BarRight progress={20 * row_1}/>
-      </div>
-      <div className="achievement" style={ {height: row_1 * 40} }>
-        DUELS WON
-      </div>
-      <div className="row">
-        <BarLeft progress={45 * row_2}/>
-        <BarRight progress={55 * row_2}/>
-      </div>
-      <div className="achievement" style={ {height: row_2 * 40} }>
-        SHOTS On GOAL
+      <div className="box" style={ {height: row_2 * 80} }>
+        <div className="row">
+          <BarLeft progress={45 * row_2}/>
+          <BarRight progress={55 * row_2}/>
+        </div>
+        <div className="achievement" style={ {height: row_2 * 40} }>
+          SHOTS ON GOAL
+        </div>
       </div>
     </div>
   }
