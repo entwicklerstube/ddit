@@ -4,7 +4,7 @@
 
 ===
 #*DATA DRIVEN TV PROJECT*
-Get informaed while watching TV.
+<img src="https://media.giphy.com/media/3o7WTGUu1rFiqhoVFu/giphy.gif">
 ##Inspiration
 With the advent of livestreaming platforms and the huge marketing potential that video content represents, there is the need of creating new engaging and highly targeted content that is fast to produce. This is where algorithms, data and automation meet with the media industry.
 
