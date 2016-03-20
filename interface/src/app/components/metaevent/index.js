@@ -6,8 +6,22 @@ export const socket = socketIOClient.connect('http://127.0.0.1:3000', {path: '/w
 export const emit = socket.emit.bind(socket);
 
 const EVENTS = {
-  'yellowcard': 'static/videos/gelbe_karte.webm',
-  'goal': 'static/videos/tor.webm'
+  'yellowcard': {
+    src: 'static/videos/gelbe_karte.webm',
+    duration: 10000
+  },
+  'goal': {
+    src: 'static/videos/tor.webm',
+    duration: 5000
+  },
+  'sun': {
+    src: 'static/videos/sun.webm',
+    duration: 5000
+  },
+  'suggestion': {
+    src: 'static/videos/racer.webm',
+    duration: 6000
+  }
 }
 let mounted = false;
 
@@ -17,12 +31,18 @@ class MetaEvent extends Component {
 
     socket.on('pushYellowCardsToGame', () => {
       this.setState({showEvent: 'yellowcard'})
-      setTimeout(() => this.setState({showEvent: false}), 10000);
     })
 
     socket.on('pushTorToGame', () => {
       this.setState({showEvent: 'goal'})
-      setTimeout(() => this.setState({showEvent: false}), 10000);
+    })
+
+    socket.on('pushAbseitsToGame', () => {
+      this.setState({showEvent: 'sun'})
+    })
+
+    socket.on('pushEckenToGame', () => {
+      this.setState({showEvent: 'suggestion'})
     })
 
     this.state = {
@@ -78,7 +98,7 @@ class MetaEvent extends Component {
           ) : ( null )}
 
           { this.state.showEvent ? (
-            <video className='active-video' src={EVENTS[this.state.showEvent]} autoPlay>
+            <video className='active-video' src={EVENTS[this.state.showEvent].src} autoPlay>
               <source  type="video/mp4" />
               Your browser doesn't support HTML5 video tag.
             </video>

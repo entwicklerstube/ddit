@@ -14,7 +14,7 @@ export default class Pitch extends Component {
       activeVideo: 0,
       videos: [{
         delay: 2000,
-        duration: 12000,
+        duration: 5000,
         source: 'static/videos/tor.webm',
         onPlayed: this.bayernJuventusVideoDone.bind(this),
         video: 'static/videos/bayernjuventus.mp4'
