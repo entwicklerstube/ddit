@@ -3,11 +3,15 @@ var server = require('http').Server(app);
 var io = require('socket.io')(server);
 var r = require('rethinkdb');
 var md5 = require('md5');
+var http = require('http');
+var request = require('request');
 
 /* CONFIG */
 var wettercom_user = "7hack";
 var wettercom_pw = "hacktheweather";
 
+var ericsson_api_key = "240e4458fc4c6ac85c290481646b21ef";
+var ericsson_url = "http://hack.api.uat.ebmsctogroup.com";
 
 // start the server
 console.log('Server started!');
@@ -190,6 +194,12 @@ app.post('/inputAbseits', urlencodedParser, function (req, res) {
 
 /* END SPORTSRADAR */
 
+function getRequestTo(path, callback) {
+    return request(ericsson_url + path, function(error, response, body) {
+        callback(error, response, body);
+    });
+}
+
 io.on('connection', function (socket) {
     /* WETTER.COM */
 
@@ -239,35 +249,49 @@ io.on('connection', function (socket) {
     });
 
 
+    /* START ERICSSON */
+
+    socket.on("getAllChannels", function(){
+
+        getRequestTo("/stores-active/source/filter?numberOfResults=1000", function(error, response, body){
+            console.log(response);
+            io.emit("pushAllChannels", response);
+        });
+    });
 
 
-    function getRandomInt(min, max) {
-        return Math.floor(Math.random() * (max - min + 1)) + min;
-    }
+    socket.on("getProgramToChannelByTime", function(data){
+        data.timeFrom = "2016-03-19T18:00:00Z";
+        data.timeTo = "2016-03-19T21:00:00Z";
+        data.programmName = 'ProSieben';
+        path = '/stores-active/contentInstance/event/filter?numberOfResults=100&' +
+            'filter={"criteria":[' +
+            '{"term":"publishedStartDateTime","operator":"atLeast","value":"'+data.timeFrom+'"},' +
+            '{"term":"publishedStartDateTime","operator":"atMost","value":"'+data.timeTo+'"},' +
+            '{"term":"sourceName","operator":"in","values":["'+data.programmName+'"]}],"operator":"and"}' +
+            '&api_key='+ericsson_api_key;
+
+        getRequestTo(path, function(error, response, body){
+            console.log(response);
+            io.emit("pushAllChannels", response);
+        });
 
 
-
-
-    var positions = [];
-
-    for(i = 0; i < 1000; i++) {
-        var position = {};
-        position.x = getRandomInt(0,100);
-        position.y = getRandomInt(0,50);
-        positions.push(position);
-    }
-
-    /*
-    setInterval(function(){
-        var act_position = positions[getRandomInt(0,1000)];
-        console.log(act_position);
-    }, 200);
-    */
-
-
-    /* FOOTBALL TRACKER */
-    socket.on("new-football-tracker", function(data) {
 
     });
 
+    socket.on("getProgramByName", function(data){
+        data.programmName = "Sport:+Football";
+
+        var path = '/stores-active/contentInstance/event/' +
+            'filter?numberOfResults=10&filter=' +
+            '{"term":"tags.value.valueId","value":"'+data.programName+'"}&api_key='+ericsson_api_key;
+
+        getRequestTo(path, function(error, response, body){
+            console.log(response);
+            io.emit("pushProgramByName", response);
+        });
+    });
+
+    /* END ERICSSON */
 });
