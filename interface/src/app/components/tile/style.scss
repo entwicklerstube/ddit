@@ -1,0 +1,18 @@
+.pitch-tile {
+  display: flex;
+  min-width: 150px;
+  height: 190px;
+  margin: 24px;
+  margin-top: 12px;
+  background: hotpink;
+  display: block;
+  box-shadow: -5px -5px 40px 0px rgba(0,0,0,1);
+  transition: 1s;
+  border: 1px solid rgba(white,.1);
+  box-sizing: border-box;
+
+  &.active {
+    box-shadow: -5px -5px 40px 0px rgba(#034EA2,1);
+    border: 1px solid rgba(white,.4);
+  }
+}

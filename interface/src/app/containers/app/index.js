@@ -9,8 +9,20 @@ export default class extends Component {
   render() {
     return (
       <div className="app">
-        <Link to={'/pitch'}>To the Pitch</Link>
-        <Link to={'/live-component'}>To the LiveComponent</Link>
+        <div>
+          <Link to={'/pitch'}>- To the Pitch</Link>
+          <br />
+          <Link to={'/live-component'}>- To the LiveComponent</Link>
+        </div>
+        --------------------------
+        <div>
+          Shorkeys für Pitch-View:<br/>
+          <ul>
+            <li>(left) kachel nach links</li>
+            <li>(right) kachel nach rechts</li>
+            <li>(ESC) zurück von detail view</li>
+          </ul>
+        </div>
       </div>
     );
   }

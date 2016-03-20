@@ -1,0 +1,19 @@
+{
+  "name": "ddtv-api",
+  "version": "0.0.1",
+  "description": "A simple abstraction layer to bundle multiple API's",
+  "main": "api.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Markus Springer",
+  "license": "ISC",
+  "dependencies": {
+    "socket.io" : "latest",
+    "express" : "latest",
+    "http" : "latest",
+    "rethinkdb" : "latest",
+    "body-parser" : "latest",
+    "md5" : "latest"
+  }
+}
