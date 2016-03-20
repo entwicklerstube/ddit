@@ -23,8 +23,8 @@ The result looks great and we can't wait to develop it further
 What we learned
 The project is engaging and this is just the beginning of what can be done.
 
-##What's next for DD.TV
-Built With
+
+###Built With
 node.js
 java
 javascript
@@ -32,7 +32,6 @@ react
 gif
 after-effects
 cinema4d
-Try it out
 
 ## Team
 <p align="center">
