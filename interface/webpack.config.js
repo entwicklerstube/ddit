@@ -23,8 +23,12 @@ module.exports = {
         loaders: ['style', 'css', 'autoprefixer', 'sass?sourceMap']
       },
       {
-        test: /\.(ttf|eot|woff|woff2|svg|png)$/,
+        test: /\.(ttf|eot|woff|svg|woff2|png)$/,
         loader: "file-loader"
+      },
+      {
+        test: /\.svg$/,
+        loader: 'babel!svg-react'
       },
       {
         test:    /\.jsx?$/,

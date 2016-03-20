@@ -18,4 +18,4 @@ render((
       <Route path='/live-component' component={LiveComponent}/>
     </Route>
   </Router>
-), document.getElementById('react-app'))
+), document.getElementById('react-app'));

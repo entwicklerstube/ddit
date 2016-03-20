@@ -1,7 +1,62 @@
 .live-component {
-  background: hotpink;
-  font-size: 72px;
+
+  width: 100%;
+
+  $delay: 0.4;
+  $duration: 1s;
+
+  $color-back: #204F0D;
+
+  background-color: $color-back;
+
+  padding: 5px 0;
+}
+
+.row {
+  display: flex;
+  width: 100%;
+
+}
+
+.bar {
+  display: flex;
+  flex: 1;
+  align-items:  center;
+  width: 100%;
+
+  margin: 0 15px;
+
+  &__wrapper {
+    display: flex;
+    width: 80%;
+  }
+
+  &__container {
+    height: 20px;
+    background-color: white;
+
+    border-radius: 3px;
+  }
+
+  &__text {
+    width: 20%;
+    margin: 0 5px;
+    color: white;
+    text-align: right;
+    font-family: 'Breakers';
+
+    &--left {
+      text-align: left;
+    }
+  }
+}
+
+.achievement {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Breakers';
   color: white;
-  text-align: center;
-  line-height: 76px;
+  margin: 10px;
+  font-size: 40px;
 }

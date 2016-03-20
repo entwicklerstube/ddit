@@ -1,5 +1,29 @@
 @charset "utf-8";
 
+@font-face {
+  font-family: "Breakers";
+  src: url("./static/font/Breakers Slab Black.woff") format('woff');
+}
+
+@font-face {
+  font-family: "Breakers";
+  src: url("./static/font/Breakers Slab Bold.woff") format('woff');
+  font-weight: bold;
+}
+
+//@font-face {
+//  font-family: "myfont";
+//  src: url("fonts/awesome-font-boldoblique.woff") format('woff');
+//  font-weight: bold;
+//  font-style: italic;
+//}
+//
+//@font-face {
+//  font-family: "myfont";
+//  src: url("fonts/awesome-font-oblique.woff") format('woff');
+//  font-style: italic;
+//}
+
 // Utilities
 @import
   '../../node_modules/scut/dist/scut', // http://davidtheclark.github.io/scut/
@@ -19,3 +43,5 @@
 
 // Components
 // @import './containers/app/style';
+
+@import "./containers/live-component/style";
