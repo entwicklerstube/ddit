@@ -11,7 +11,7 @@ export default class extends Component {
       <div className='pitch-screen' style={inlineStyling}>
 
         { this.props.video ? (
-          <video className='active-video' src={this.props.video} autoPlay>
+          <video className='active-video' src={this.props.video} autoPlay muted>
             <source  type="video/mp4" />
             Your browser doesn't support HTML5 video tag.
           </video>

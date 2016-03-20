@@ -1,42 +1,25 @@
 <html>
 <head>
-<script src="/socket.io/socket.io.js"></script>
+<script src="/ws/socket.io.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
 </head>
 <body>
 
 <h1>API</h1>
+<h3 style="color: red;">Neue Animation erst starten wenn bereits gestartete fertig ist!!!</h3>
 
-<button data-name="getYellowCardsToGame">Gelbe Karte</button>
-<button data-name="getRedCardsToGame">Rote Karte</button>
 <button data-name="getTorToGame">Tor geschossen</button>
+<button data-name="getYellowCardsToGame">Gelbe Karte</button>
+<button data-name="getEckenToGame">TV Vorschlag</button>
+<button data-name="getAbseitsToGame">Wetter</button>
+
+<!-- <button data-name="getRedCardsToGame">Rote Karte</button>
 <button data-name="getVerschossenToGame">Tor verschossen</button>
 <button data-name="getEinwuerfeToGame">Einwurf</button>
-<button data-name="getFreistoesseToGame">Freistoß</button>
-<button data-name="getEckenToGame">Ecke</button>
-<button data-name="getAbseitsToGame">Abseits</button>
-
-
-<canvas id="myCanvas" width="578" height="200"></canvas>
-<script>
-    window.requestAnimFrame = (function(callback) {
-        return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame ||
-                function(callback) {
-                    window.setTimeout(callback, 1000 / 60);
-                };
-    })();
-
-    function drawCircle(ctx, circle_obj) {
-        ctx.beginPath();
-        ctx.arc(circle_obj.radius,circle_obj.centerX,circle_obj.centerY,0,2*Math.PI);
-        ctx.stroke();
-    }
-
-
-</script>
+<button data-name="getFreistoesseToGame">Freistoß</button> -->
 
 <script>
-    var socket = io('http://localhost:3000');
+    var socket = io('http://localhost:3000', {path: '/ws'});
 
     $(function(){
        $('button').click(function(){
@@ -44,7 +27,6 @@
            socket.emit(event);
        });
 
-        socket.on("")
     });
 
 </script>
