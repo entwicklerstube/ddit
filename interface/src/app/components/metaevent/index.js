@@ -21,7 +21,7 @@ const EVENTS = {
     duration: 5000
   },
   'suggestion': {
-    src: 'static/videos/racer.webm',
+    src: 'static/videos/racing.webm',
     duration: 6000
   }
 }
@@ -32,8 +32,8 @@ class MetaEvent extends Component {
     super(props);
 
     socket.on('pushYellowCardsToGame', () => {
-      // this.setState({showEvent: 'yellowcard'})
-      this.setState({showEventComponent: true, showEvent: false})
+      this.setState({showEvent: 'yellowcard'})
+      // this.setState({showEventComponent: true, showEvent: false})
     })
 
     socket.on('pushTorToGame', () => {

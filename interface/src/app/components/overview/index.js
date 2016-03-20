@@ -15,6 +15,8 @@ export default class Overview extends Component {
         cover: 'static/images/tiles/bayern-juventus.png'
       },{
         cover: 'static/images/tiles/football.png'
+      },{
+        cover: 'static/images/tiles/teletubby.png'
       }]
     }
   }

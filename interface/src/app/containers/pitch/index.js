@@ -20,7 +20,7 @@ export default class Pitch extends Component {
         onPlayed: this.bayernJuventusVideoDone.bind(this),
         video: 'static/videos/bayernjuventus.mp4'
       },{
-        video: 'static/videos/gntm.mp4'
+        video: 'static/videos/titanik.mp4'
       }]
     }
   }
@@ -28,6 +28,10 @@ export default class Pitch extends Component {
   componentWillMount() {
     this.props.bindShortcut('esc', () => {
       this.setState({showOverview:true})
+    });
+
+    this.props.bindShortcut('1', () => {
+      this.setState({activeVideo:0})
     });
 
     this.props.bindShortcut('2', () => {
