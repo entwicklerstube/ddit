@@ -6,6 +6,7 @@ import Frame from './frame';
 import App from './containers/app';
 
 import Pitch from './containers/pitch';
+import Animation from './containers/animation';
 import LiveComponent from './containers/live-component';
 
 require('./app.scss');
@@ -15,6 +16,7 @@ render((
     <Route name="app" path="/" component={Frame}>
       <IndexRoute component={App}/>
       <Route path='/pitch' component={Pitch}/>
+      <Route path='/animation' component={Animation}/>
       <Route path='/live-component' component={LiveComponent}/>
     </Route>
   </Router>

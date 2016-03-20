@@ -1,131 +1,78 @@
 import React, {Component}                   from 'react';
 
 import {presets, StaggeredMotion, TransitionMotion, Motion, spring} from 'react-motion';
-//
-//import tweenState from 'react-tween-state';
 
-//const App = React.createClass({
-//  mixins: [tweenState.Mixin],
-//
-//  getInitialState: function() {
-//    return {
-//      bars: [{
-//        left: 75,
-//        right: 100
-//      }]
-//    };
-//  },
-//
-//  componentDidMount: function() {
-//    this.tweenState('left', {
-//      easing: tweenState.easingTypes.easeInOutQuad,
-//      duration: 500,
-//      endValue: this.state.left === 0 ? 400 : 0
-//    });
-//  },
-//
-//  render: function() {
-//
-//    return (
-//      <div className="live-component">
-//        <svg width="100%" height="100%" viewBox="0 0 100 100">
-//          <g transform="translate(0,0)">
-//            <rect x="0" y="0" height="5" width="50" fill="white"/>
-//          </g>
-//          <g transform="translate(50,0)">
-//            <rect x="0" y="0" height="5" width="50" fill="white"/>
-//          </g>
-//
-//        </svg>
-//      </div>
-//    );
-//  }
-//});
+import animate, {EasingFunctions, timeline} from '../../vendor/animation';
+
 
 const BarLeft = ({progress}) => (
-  <Motion defaultStyle={{p: 0}} style={{p: spring(progress, presets.wobbly)}}>
-    { ({p}) => (
-      <div className="bar">
-        <div className="bar__text bar__text--left">{p.toFixed(0)} %</div>
-        <div className="bar__wrapper">
-          <div className="bar__empty" style={ { width: (100-p) + '%'} }/>
-          <div className="bar__container" style={ { width: p + '%'} }/>
-        </div>
-      </div>
-    )
-    }
-  </Motion>
+  <div className="bar">
+    <div className="bar__text bar__text--left">{progress.toFixed(0)} %</div>
+    <div className="bar__wrapper">
+      <div className="bar__empty" style={ { width: (100-progress) + '%'} }/>
+      <div className="bar__container" style={ { width: progress + '%'} }/>
+    </div>
+  </div>
 );
 
 const BarRight = ({progress}) => (
-  <Motion defaultStyle={{p: 0}} style={{p: spring(progress, presets.wobbly)}}>
-    { ({p}) => (
-      <div className="bar">
-        <div className="bar__wrapper">
-          <div className="bar__container" style={ { width: p + '%'} }/>
-        </div>
-        <div className="bar__text">{p.toFixed(0)} %</div>
-      </div>
-    )
-    }
-  </Motion>
+  <div className="bar">
+    <div className="bar__wrapper">
+      <div className="bar__container" style={ { width: progress + '%'} }/>
+    </div>
+    <div className="bar__text">{progress.toFixed(0)} %</div>
+  </div>
 );
 
 export default class extends Component {
 
+  state = {
+    row_0: 0,
+    row_1: 0,
+    row_2: 0
+  };
+
+  animateRow(row) {
+    return () => {
+      animate(400, p => {
+        this.setState({['row_' + row]: p});
+      }, EasingFunctions.easeInOutQuad)
+    };
+  };
+
+  componentDidMount() {
+    timeline([
+      500, this.animateRow(0),
+      1300, this.animateRow(1),
+      2100, this.animateRow(2)
+    ]);
+  }
+
   render() {
+    const {row_0, row_1, row_2} = this.state;
 
     return <div className="live-component">
       <div className="row">
-        <BarLeft progress={60}/>
-        <BarRight progress={90}/>
+        <BarLeft progress={60 * row_0}/>
+        <BarRight progress={90 * row_0}/>
       </div>
-      <div className="achievement">
+      <div className="achievement" style={ {height: row_0 * 40} } >
         POSESSION
       </div>
       <div className="row">
-        <BarLeft progress={80}/>
-        <BarRight progress={20}/>
+        <BarLeft progress={80 * row_1}/>
+        <BarRight progress={20 * row_1}/>
       </div>
-      <div className="achievement">
+      <div className="achievement" style={ {height: row_1 * 40} }>
         DUELS WON
       </div>
       <div className="row">
-        <BarLeft progress={45}/>
-        <BarRight progress={55}/>
+        <BarLeft progress={45 * row_2}/>
+        <BarRight progress={55 * row_2}/>
       </div>
-      <div className="achievement">
+      <div className="achievement" style={ {height: row_2 * 40} }>
         SHOTS On GOAL
       </div>
     </div>
   }
 }
-
-//
-//<svg>
-//  <Motion defaultStyle={{x: 0}} style={{x: spring(width, presets.wobbly)}}>
-//    { value => (
-//      <g>
-//        <rect width={value.x} height="30" x="0" y="0" fill="red" />
-//        <path transform={`translate(${value.x},0)`} fill="red" d="M0 0 L0 30 L30 30 L0 15 L30 0 Z" />
-//      </g>
-//    )
-//    }
-//  </Motion>
-//</svg>
-
-
-//<svg width="400px" height="800px">
-//  <g>
-//    <rect className="bar bar--1" y="0" height="20" width="200"/>
-//  </g>
-//
-//  <g transform="scale(0.1 1)">
-//    <rect y="40" className="bar bar--2" height="20"/>
-//  </g>
-//
-//  <g transform="scale(0.8 1)">
-//    <rect y="80" className="bar bar--3" height="20"/>
-//  </g>
-//
-//</svg>
