@@ -205,26 +205,39 @@ io.on('connection', function (socket) {
 
     /* ENDE WETTER.COM */
 
-
+    // Zeigt Gelbe Karte in UI
     socket.on("getYellowCardsToGame", function(){
+      console.log('asd');
         io.emit("pushYellowCardsToGame");
     });
+
+    // Zeigt Wetter in der UI an
+    socket.on("getAbseitsToGame", function(){
+        io.emit("pushAbseitsToGame");
+    });
+
+    // Zeigt Tor Animation an
+    socket.on("getTorToGame", function(){
+        io.emit("pushTorToGame");
+    });
+
+
+    // Zeigt racer animation an
+    socket.on("getEinwuerfeToGame", function(){
+      io.emit("pushEinwuerfeToGame");
+    });
+
+
 
     socket.on("getRedCardsToGame", function(){
         io.emit("pushRedCardsToGame");
     });
 
-    socket.on("getTorToGame", function(){
-        io.emit("pushTorToGame");
-    });
 
     socket.on("getVerschossenToGame", function(){
         io.emit("pushVerschossenToGame");
     });
 
-    socket.on("getEinwuerfeToGame", function(){
-        io.emit("pushEinwuerfeToGame");
-    });
 
     socket.on("getFreistoesseToGame", function(){
         io.emit("pushFreistoesseToGame");
@@ -233,11 +246,6 @@ io.on('connection', function (socket) {
     socket.on("getEckenToGame", function(){
         io.emit("pushEckenToGame");
     });
-
-    socket.on("getAbseitsToGame", function(){
-        io.emit("pushAbseitsToGame");
-    });
-
 
 
 
