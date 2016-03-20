@@ -1,6 +1,6 @@
 <html>
 <head>
-<script src="/socket.io/socket.io.js"></script>
+<script src="/ws/socket.io.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
 </head>
 <body>
@@ -79,7 +79,7 @@
 </script>
 
 <script>
-    var socket = io('http://localhost:3000');
+    var socket = io('http://localhost:3000', {path: '/ws'});
 
     $(function(){
        $('button').click(function(){

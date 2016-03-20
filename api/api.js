@@ -1,6 +1,6 @@
 var app = require('express')();
 var server = require('http').Server(app);
-var io = require('socket.io')(server);
+var io = require('socket.io')(server, { path: '/ws' });
 var r = require('rethinkdb');
 var md5 = require('md5');
 
