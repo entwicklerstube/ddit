@@ -82,7 +82,7 @@ app.post('/inputGelbeKarten', urlencodedParser, function (req, res) {
     if(gelbeKarte){
         console.log("Gelbe Karte: " + gelbeKarte);
 
-        r.table("gelbeKarte").insert(gelbeKarte).run(conn, function(){
+        r.table("gelbeKarte").insert(gelbeKarte).run(connection, function(){
             res.status(200).send('Eintrag erfolgreich hinzugefügt');
         });
 
@@ -103,7 +103,7 @@ app.post('/inputRoteKarten', urlencodedParser, function (req, res) {
     var roteKarte = req.body;
     if(roteKarte){
         console.log("Rote Karte " + roteKarte);
-        r.table("roteKarte").insert(gelbeKarte).run(conn, function(){
+        r.table("roteKarte").insert(gelbeKarte).run(connection, function(){
             res.status(200).send('Eintrag erfolgreich hinzugefügt');
         });
     } else {
@@ -115,7 +115,7 @@ app.post('/inputTor', function (req, res) {
     var tor = req.body;
     if(tor){
         console.log("Tor: " + tor);
-        r.table("tor").insert(tor).run(conn, function(){
+        r.table("tor").insert(tor).run(connection, function(){
             res.status(200).send('Eintrag erfolgreich hinzugefügt');
         });
 
@@ -128,7 +128,7 @@ app.post('/inputVerschossen', function (req, res) {
     var verschossen = req.body;
     if(verschossen){
         console.log("Verschossen:" + verschossen);
-        r.table("verschossen").insert(verschossen).run(conn, function(){
+        r.table("verschossen").insert(verschossen).run(connection, function(){
             res.status(200).send('Eintrag erfolgreich hinzugefügt');
         });
 
@@ -141,7 +141,7 @@ app.post('/inputEinwurf', urlencodedParser, function (req, res) {
     var einwurf = req.body;
     if(einwurf){
         console.log("Einwurf: " + einwurf);
-        r.table("einwurf").insert(einwurf).run(conn, function(){
+        r.table("einwurf").insert(einwurf).run(connection, function(){
             res.status(200).send('Eintrag erfolgreich hinzugefügt');
         });
 
@@ -154,7 +154,7 @@ app.post('/inputFreistoss', urlencodedParser, function (req, res) {
     var freistoss = req.body;
     if(freistoss){
         console.log("Freistoss: " + freistoss);
-        r.table("freistoss").insert(freistoss).run(conn, function(){
+        r.table("freistoss").insert(freistoss).run(connection, function(){
             res.status(200).send('Eintrag erfolgreich hinzugefügt');
         });
 
@@ -167,7 +167,7 @@ app.post('/inputEcke', urlencodedParser, function (req, res) {
     var ecke = req.body;
     if(ecke){
         console.log("Ecke: " + ecke);
-        r.table("ecke").insert(ecke).run(conn, function(){
+        r.table("ecke").insert(ecke).run(connection, function(){
             res.status(200).send('Eintrag erfolgreich hinzugefügt');
         });
 
@@ -180,7 +180,7 @@ app.post('/inputAbseits', urlencodedParser, function (req, res) {
     var abseits = req.body;
     if(abseits){
         console.log("Abseits: " + abseits);
-        r.table("abseits").insert(abseits).run(conn, function(){
+        r.table("abseits").insert(abseits).run(connection, function(){
             res.status(200).send('Eintrag erfolgreich hinzugefügt');
         });
     } else {
@@ -237,4 +237,37 @@ io.on('connection', function (socket) {
     socket.on("getAbseitsToGame", function(){
         io.emit("pushAbseitsToGame");
     });
+
+
+
+
+    function getRandomInt(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+
+
+
+    var positions = [];
+
+    for(i = 0; i < 1000; i++) {
+        var position = {};
+        position.x = getRandomInt(0,100);
+        position.y = getRandomInt(0,50);
+        positions.push(position);
+    }
+
+    /*
+    setInterval(function(){
+        var act_position = positions[getRandomInt(0,1000)];
+        console.log(act_position);
+    }, 200);
+    */
+
+
+    /* FOOTBALL TRACKER */
+    socket.on("new-football-tracker", function(data) {
+
+    });
+
 });
