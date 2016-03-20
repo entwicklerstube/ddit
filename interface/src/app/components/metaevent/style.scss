@@ -1,5 +1,9 @@
 .metaevent {
   display: block;
+  position: relative;
+  z-index: 10000;
+  width: 100%;
+  height: 100%;
 
   .info-block {
     transition: .5s;
@@ -10,6 +14,7 @@
     bottom: 25px;
     background-size: contain;
     background-repeat: no-repeat;
+    z-index: 10000;
 
     &.small {
       width: 260px;

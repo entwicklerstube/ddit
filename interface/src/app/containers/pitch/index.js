@@ -15,6 +15,7 @@ export default class Pitch extends Component {
       videos: [{
         delay: 2000,
         duration: 5000,
+        srcDuration: 12000,
         source: 'static/videos/tor.webm',
         onPlayed: this.bayernJuventusVideoDone.bind(this),
         video: 'static/videos/bayernjuventus.mp4'
@@ -28,6 +29,10 @@ export default class Pitch extends Component {
     this.props.bindShortcut('esc', () => {
       this.setState({showOverview:true})
     });
+
+    this.props.bindShortcut('2', () => {
+      this.setState({activeVideo:1})
+    });
   }
 
   onTileChoose() {
@@ -35,7 +40,6 @@ export default class Pitch extends Component {
   }
 
   bayernJuventusVideoDone() {
-    console.log('use next video');
     this.setState({activeVideo:1})
   }
 

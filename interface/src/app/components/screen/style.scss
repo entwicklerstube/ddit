@@ -7,6 +7,15 @@
   width: 100%;
   height: 100%;
 
+  .shadow-layer {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: block;
+    background: linear-gradient(-45deg,rgba(black, .5),transparent);
+    z-index: 100;
+  }
+
   .children {
     position: absolute;
     z-index: 20;

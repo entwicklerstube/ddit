@@ -9,7 +9,6 @@ export default class extends Component {
 
     return (
       <div className='pitch-screen' style={inlineStyling}>
-
         { this.props.video ? (
           <video className='active-video' src={this.props.video} autoPlay muted>
             <source  type="video/mp4" />
